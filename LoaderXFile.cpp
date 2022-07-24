@@ -58,13 +58,13 @@ HRESULT CLoaderXFile::Load( WCHAR* szFileName, FRAME_TRANSFORM_TYPE requestedBHT
 
     hr = pD3D9->CreateDevice( D3DADAPTER_DEFAULT, D3DDEVTYPE_NULLREF, NULL, D3DCREATE_SOFTWARE_VERTEXPROCESSING, &pp, &pDev9 );
     if(FAILED(hr))
-        goto Error;
+        goto Error; //???
 
     if( szFileName )
     {
         hr = D3DXLoadMeshFromX( szFileName, 0, pDev9, NULL, &pMat, NULL, &cMat, &pRawMesh );
         if(FAILED(hr))
-            goto Error;
+            goto Error; //???
     }
 
     D3DVERTEXELEMENT9 declTanBi[] = 
@@ -86,7 +86,7 @@ HRESULT CLoaderXFile::Load( WCHAR* szFileName, FRAME_TRANSFORM_TYPE requestedBHT
         if( !pAdjBuffer )
         {
             hr = E_OUTOFMEMORY;
-            goto Error;        //????
+            goto Error; //???
         }
         m_pMesh->GenerateAdjacency( 0.001f, pAdjBuffer );
         m_pMesh->OptimizeInplace( D3DXMESHOPT_ATTRSORT,
@@ -112,7 +112,7 @@ HRESULT CLoaderXFile::Load( WCHAR* szFileName, FRAME_TRANSFORM_TYPE requestedBHT
             if( !m_pMats )
             {
                 hr = E_OUTOFMEMORY;
-                goto Error;
+                goto Error; //???
             }
 
             for( DWORD m=0; m<m_dwNumMaterials; m++ )
@@ -124,7 +124,7 @@ HRESULT CLoaderXFile::Load( WCHAR* szFileName, FRAME_TRANSFORM_TYPE requestedBHT
         // Создайть промежуточную сетку
         hr = CreateIntermediateMesh( declTanBi, 6 );
         if(FAILED(hr))
-            goto Error; // ???
+            goto Error; //???
     }
 
     hr = S_OK;
@@ -164,7 +164,7 @@ HRESULT CLoaderXFile::CreateIntermediateMesh( D3DVERTEXELEMENT9* pDecl,
     void* pVertices = NULL;
     hr = m_pMesh->LockVertexBuffer( 0, &pVertices );
     if(FAILED(hr))
-        goto Error;
+        goto Error; //???
     m_pIntermediateMesh->AddVertexBuffer(pMesh, 0, dwNumVertices, dwNumVertices*dwVertexStride, dwVertexStride, pDecl, NumElements, pVertices );
     m_pMesh->UnlockVertexBuffer();
 
@@ -173,7 +173,7 @@ HRESULT CLoaderXFile::CreateIntermediateMesh( D3DVERTEXELEMENT9* pDecl,
     void* pIndices = NULL;
     hr = m_pMesh->LockIndexBuffer( 0, &pIndices );
     if(FAILED(hr))
-        goto Error;
+        goto Error; //???
     m_pIntermediateMesh->AddIndexBuffer( pMesh, dwNumFaces*3, dwNumFaces*3*sizeof(DWORD), IT_32BIT, pIndices );
     m_pMesh->UnlockIndexBuffer();
 
