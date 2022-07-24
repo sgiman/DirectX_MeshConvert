@@ -156,7 +156,7 @@ LCleanup:
 
 //#ifdef DEBUG_PRESSKEY
     wprintf( L"Press ENTER to continue (sgiman-test)...");
-    _getch();
+    _getch();   // pause for console!!!
 //#endif 
 
     // Cleanup
