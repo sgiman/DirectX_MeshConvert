@@ -40,11 +40,11 @@ bool IsNextArg( WCHAR*& strsettings, WCHAR* strArg );
 
 ///////////////////////////////////////////////////////////////////////////////
 // Name: main()
-// Desc: Òî÷êà âõîäà äëÿ ïðèëîæåíèÿ. Ìû èñïîëüçóåì òîëüêî êîíñîëüíîå îêíî
+// Desc: Ð¢Ð¾Ñ‡ÐºÐ° Ð²Ñ…Ð¾Ð´Ð° Ð´Ð»Ñ Ð¿Ñ€Ð¸Ð»Ð¾Ð¶ÐµÐ½Ð¸Ñ. ÐœÑ‹ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐµÐ¼ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ ÐºÐ¾Ð½ÑÐ¾Ð»ÑŒÐ½Ð¾Ðµ Ð¾ÐºÐ½Ð¾
 ///////////////////////////////////////////////////////////////////////////////
 int __cdecl main(int argc, char* argv[])
 {
-    // Âêëþ÷èòå ïðîâåðêó ïàìÿòè âî âðåìÿ âûïîëíåíèÿ äëÿ îòëàäî÷íûõ ñáîðîê.
+    // Ð’ÐºÐ»ÑŽÑ‡Ð¸Ñ‚Ðµ Ð¿Ñ€Ð¾Ð²ÐµÑ€ÐºÑƒ Ð¿Ð°Ð¼ÑÑ‚Ð¸ Ð²Ð¾ Ð²Ñ€ÐµÐ¼Ñ Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ñ Ð´Ð»Ñ Ð¾Ñ‚Ð»Ð°Ð´Ð¾Ñ‡Ð½Ñ‹Ñ… ÑÐ±Ð¾Ñ€Ð¾Ðº.
 #if defined(DEBUG) | defined(_DEBUG)
     _CrtSetDbgFlag( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );
 #endif
@@ -80,7 +80,7 @@ int __cdecl main(int argc, char* argv[])
         }
     }
 
-    // Ñîçäàòü óñòðîéñòâî NULLREF 
+    // Ð¡Ð¾Ð·Ð´Ð°Ñ‚ÑŒ ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ð¾ NULLREF 
     pd3dDevice = CreateNULLRefDevice(); 
     if( pd3dDevice == NULL )
     {
@@ -95,7 +95,7 @@ int __cdecl main(int argc, char* argv[])
             wprintf( L"NULLREF Direct3D 9 device created\n" );   
         }
 
-        // Çàãðóçèòü ñåòêó
+        // Ð—Ð°Ð³Ñ€ÑƒÐ·Ð¸Ñ‚ÑŒ ÑÐµÑ‚ÐºÑƒ
         CLoader loader;
         if( FAILED(loader.Load( settings.strInputFile, FTT_RELATIVE )) )
         {
@@ -104,34 +104,34 @@ int __cdecl main(int argc, char* argv[])
             nRet = 1;
         }
 
-        // Êîíâåðèòèðîâàòü â Little Endian
+        // ÐšÐ¾Ð½Ð²ÐµÑ€Ð¸Ñ‚Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ð² Little Endian
         loader.GetMesh()->ConvertToLittleEndian();
 
-        // Ñîçäàòü decl, êîòîðûé îòðàæàåò íàøè âõîäíûå äàííûå
+        // Ð¡Ð¾Ð·Ð´Ð°Ñ‚ÑŒ decl, ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ð¹ Ð¾Ñ‚Ñ€Ð°Ð¶Ð°ÐµÑ‚ Ð½Ð°ÑˆÐ¸ Ð²Ñ…Ð¾Ð´Ð½Ñ‹Ðµ Ð´Ð°Ð½Ð½Ñ‹Ðµ
         D3DVERTEXELEMENT9 decl[MAX_VERTEX_ELEMENTS];
         BuildVertexDecl( decl, &settings );
 
-        // Ïðåîáðàçîâàòü ìåø â ýòîò decl
+        // ÐŸÑ€ÐµÐ¾Ð±Ñ€Ð°Ð·Ð¾Ð²Ð°Ñ‚ÑŒ Ð¼ÐµÑˆ Ð² ÑÑ‚Ð¾Ñ‚ decl
         loader.GetMesh()->ConvertVertexData( pd3dDevice, decl, MAX_VERTEX_ELEMENTS );
 
-        // Èñïðàâèòü ñåòêó
+        // Ð˜ÑÐ¿Ñ€Ð°Ð²Ð¸Ñ‚ÑŒ ÑÐµÑ‚ÐºÑƒ
         loader.GetMesh()->FixMesh();
 
-        // åñëè íàì íóæíû íîðìàëè, ñãåíåðèðîâàòü èõ
+        // ÐµÑÐ»Ð¸ Ð½Ð°Ð¼ Ð½ÑƒÐ¶Ð½Ñ‹ Ð½Ð¾Ñ€Ð¼Ð°Ð»Ð¸, ÑÐ³ÐµÐ½ÐµÑ€Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ð¸Ñ…
         if( settings.bGenNormals )
         {
             if( !loader.GetMesh()->GenerateNormals( pd3dDevice ) )
                 wprintf( L"Warning:  Cannot generate normal information for mesh\n" );
         }
 
-        // åñëè íàì íóæíû êàñàòåëüíûå èëè áèíîðìàëè, ñãåíåðèðîâàòü èõ
+        // ÐµÑÐ»Ð¸ Ð½Ð°Ð¼ Ð½ÑƒÐ¶Ð½Ñ‹ ÐºÐ°ÑÐ°Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ðµ Ð¸Ð»Ð¸ Ð±Ð¸Ð½Ð¾Ñ€Ð¼Ð°Ð»Ð¸, ÑÐ³ÐµÐ½ÐµÑ€Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ð¸Ñ…
         if( settings.bGenTangents || settings.bGenBinormals )
         {
             if( !loader.GetMesh()->GenerateTangents( pd3dDevice ) )
                 wprintf( L"Warning:  Cannot generate tangent frame information for mesh\n" );
         }
 
-        // Ñîõðàíèòü ýòî
+        // Ð¡Ð¾Ñ…Ñ€Ð°Ð½Ð¸Ñ‚ÑŒ ÑÑ‚Ð¾
         if( FAILED( loader.Save( pd3dDevice, settings.strOutputFile, settings.outputType ) ) )
         {
             wprintf( L"Cannot Save specified output file\n" );
@@ -169,7 +169,7 @@ LCleanup:
 
 
 //--------------------------------------------------------------------------------------
-// Àíàëèçèðóåò êîìàíäíóþ ñòðîêó íà íàëè÷èå ïàðàìåòðîâ. Ñì. DXUTInit() äëÿ ñïèñêà 
+// ÐÐ½Ð°Ð»Ð¸Ð·Ð¸Ñ€ÑƒÐµÑ‚ ÐºÐ¾Ð¼Ð°Ð½Ð´Ð½ÑƒÑŽ ÑÑ‚Ñ€Ð¾ÐºÑƒ Ð½Ð° Ð½Ð°Ð»Ð¸Ñ‡Ð¸Ðµ Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ð¾Ð². Ð¡Ð¼. DXUTInit() Ð´Ð»Ñ ÑÐ¿Ð¸ÑÐºÐ° 
 //--------------------------------------------------------------------------------------
 bool ParseCommandLine( SETTINGS* pSettings )
 {
@@ -184,7 +184,7 @@ bool ParseCommandLine( SETTINGS* pSettings )
     {
         strCmdLine = pstrArgList[iArg];
 
-        // Îáðàáîòêà àðãóìåíòîâ ôãàãîâ (args)
+        // ÐžÐ±Ñ€Ð°Ð±Ð¾Ñ‚ÐºÐ° Ð°Ñ€Ð³ÑƒÐ¼ÐµÐ½Ñ‚Ð¾Ð² Ñ„Ð³Ð°Ð³Ð¾Ð² (args)
         if( *strCmdLine == L'/' || *strCmdLine == L'-' )
         {
             strCmdLine++;
@@ -279,13 +279,13 @@ bool ParseCommandLine( SETTINGS* pSettings )
                 return false;
             }
 
-            // Íåîïîçíàííûé ôëàã
+            // ÐÐµÐ¾Ð¿Ð¾Ð·Ð½Ð°Ð½Ð½Ñ‹Ð¹ Ñ„Ð»Ð°Ð³
             wprintf( L"Unrecognized or incorrect flag usage: %s\n", strCmdLine );
             bDisplayError = true;
         }
         else
         {
-            // Îáðàáàòûâàòü àðãóìåíòû áåç ôëàãà êàê îòäåëüíûé âõîäíîé ôàéë
+            // ÐžÐ±Ñ€Ð°Ð±Ð°Ñ‚Ñ‹Ð²Ð°Ñ‚ÑŒ Ð°Ñ€Ð³ÑƒÐ¼ÐµÐ½Ñ‚Ñ‹ Ð±ÐµÐ· Ñ„Ð»Ð°Ð³Ð° ÐºÐ°Ðº Ð¾Ñ‚Ð´ÐµÐ»ÑŒÐ½Ñ‹Ð¹ Ð²Ñ…Ð¾Ð´Ð½Ð¾Ð¹ Ñ„Ð°Ð¹Ð»
             if( pSettings->bInputFileProvided )
             {
                 wprintf( L"Too many input files provided: %s\n", strCmdLine );

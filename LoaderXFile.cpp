@@ -35,7 +35,7 @@ HRESULT CLoaderXFile::Load( WCHAR* szFileName, FRAME_TRANSFORM_TYPE requestedBHT
     IDirect3DDevice9* pDev9 = NULL;
     DWORD* pAdjBuffer = NULL;
 
-    // Создать объект d3d9
+    // РЎРѕР·РґР°С‚СЊ РѕР±СЉРµРєС‚ d3d9
     IDirect3D9* pD3D9 = Direct3DCreate9( D3D_SDK_VERSION );
 
     if( pD3D9 == NULL )
@@ -78,10 +78,10 @@ HRESULT CLoaderXFile::Load( WCHAR* szFileName, FRAME_TRANSFORM_TYPE requestedBHT
     };
     D3DVERTEXELEMENT9* pdecl = declTanBi;
 
-    //Сделайть клон с нужным форматом вершин.
+    //РЎРґРµР»Р°Р№С‚СЊ РєР»РѕРЅ СЃ РЅСѓР¶РЅС‹Рј С„РѕСЂРјР°С‚РѕРј РІРµСЂС€РёРЅ.
     if( SUCCEEDED( pRawMesh->CloneMesh( D3DXMESH_32BIT | D3DXMESH_DYNAMIC, pdecl, pDev9, &m_pMesh ) ) )
     {
-        // Оптимизировать
+        // РћРїС‚РёРјРёР·РёСЂРѕРІР°С‚СЊ
         pAdjBuffer = new DWORD[ 3*m_pMesh->GetNumFaces() ];
         if( !pAdjBuffer )
         {
@@ -95,7 +95,7 @@ HRESULT CLoaderXFile::Load( WCHAR* szFileName, FRAME_TRANSFORM_TYPE requestedBHT
                                     NULL,
                                     NULL );
 
-        // Атрибуты
+        // РђС‚СЂРёР±СѓС‚С‹
         m_pMesh->GetAttributeTable( NULL, &m_dwNumAttr );
         if( m_dwNumAttr > 0 )
         {
@@ -103,7 +103,7 @@ HRESULT CLoaderXFile::Load( WCHAR* szFileName, FRAME_TRANSFORM_TYPE requestedBHT
             m_pMesh->GetAttributeTable( m_pAttr, &m_dwNumAttr );
         }
 
-        // Материалы
+        // РњР°С‚РµСЂРёР°Р»С‹
         m_dwNumMaterials = cMat;
         if( m_dwNumMaterials > 0 )
         {
@@ -121,7 +121,7 @@ HRESULT CLoaderXFile::Load( WCHAR* szFileName, FRAME_TRANSFORM_TYPE requestedBHT
             }
         }
 
-        // Создайть промежуточную сетку
+        // РЎРѕР·РґР°Р№С‚СЊ РїСЂРѕРјРµР¶СѓС‚РѕС‡РЅСѓСЋ СЃРµС‚РєСѓ
         hr = CreateIntermediateMesh( declTanBi, 6 );
         if(FAILED(hr))
             goto Error;
@@ -154,11 +154,11 @@ HRESULT CLoaderXFile::CreateIntermediateMesh( D3DVERTEXELEMENT9* pDecl,
     HRESULT hr = E_FAIL;
     D3DXMATRIX mIdentity;
 
-    // Создать сетку
+    // РЎРѕР·РґР°С‚СЊ СЃРµС‚РєСѓ
     m_pIntermediateMesh = new CIntermediateMesh( 0, TEXT("XFileMesh") );
     INTERMEDIATE_MESH* pMesh = m_pIntermediateMesh->AddMesh( "" );
 
-    // Получить вершины в сетке
+    // РџРѕР»СѓС‡РёС‚СЊ РІРµСЂС€РёРЅС‹ РІ СЃРµС‚РєРµ
     DWORD dwNumVertices = m_pMesh->GetNumVertices();
     DWORD dwVertexStride = m_pMesh->GetNumBytesPerVertex();
     void* pVertices = NULL;
@@ -168,7 +168,7 @@ HRESULT CLoaderXFile::CreateIntermediateMesh( D3DVERTEXELEMENT9* pDecl,
     m_pIntermediateMesh->AddVertexBuffer(pMesh, 0, dwNumVertices, dwNumVertices*dwVertexStride, dwVertexStride, pDecl, NumElements, pVertices );
     m_pMesh->UnlockVertexBuffer();
 
-    // Получить индексы в сетке
+    // РџРѕР»СѓС‡РёС‚СЊ РёРЅРґРµРєСЃС‹ РІ СЃРµС‚РєРµ
     DWORD dwNumFaces = m_pMesh->GetNumFaces();
     void* pIndices = NULL;
     hr = m_pMesh->LockIndexBuffer( 0, &pIndices );
@@ -177,7 +177,7 @@ HRESULT CLoaderXFile::CreateIntermediateMesh( D3DVERTEXELEMENT9* pDecl,
     m_pIntermediateMesh->AddIndexBuffer( pMesh, dwNumFaces*3, dwNumFaces*3*sizeof(DWORD), IT_32BIT, pIndices );
     m_pMesh->UnlockIndexBuffer();
 
-    // Получить материалы сетки
+    // РџРѕР»СѓС‡РёС‚СЊ РјР°С‚РµСЂРёР°Р»С‹ СЃРµС‚РєРё
     for( DWORD m=0; m<m_dwNumMaterials; m++ )
     {
         m_pIntermediateMesh->AddMaterial( "", 
@@ -192,7 +192,7 @@ HRESULT CLoaderXFile::CreateIntermediateMesh( D3DVERTEXELEMENT9* pDecl,
                                           m_pMats[m].MatD3D.Power );
     }
 
-    // Получить подмножества в сетке
+    // РџРѕР»СѓС‡РёС‚СЊ РїРѕРґРјРЅРѕР¶РµСЃС‚РІР° РІ СЃРµС‚РєРµ
     for( DWORD s=0; s<m_dwNumAttr; s++ )
     {
         m_pIntermediateMesh->AddSubset( pMesh,
@@ -205,7 +205,7 @@ HRESULT CLoaderXFile::CreateIntermediateMesh( D3DVERTEXELEMENT9* pDecl,
                                         m_pAttr[s].VertexCount );
     }
 
-    // Добавить кадр по умолчанию
+    // Р”РѕР±Р°РІРёС‚СЊ РєР°РґСЂ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
     D3DXMatrixIdentity( &mIdentity );
     m_pIntermediateMesh->AddFrame( "", NULL, mIdentity, 0 );
 

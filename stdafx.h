@@ -25,7 +25,7 @@
 #endif
 #pragma comment( lib, "d3d9.lib" )
 
-#pragma warning( disable : 4100 ) // отключить предупреждения формальных параметров без ссылок для сборок /W 4
+#pragma warning( disable : 4100 ) // РѕС‚РєР»СЋС‡РёС‚СЊ РїСЂРµРґСѓРїСЂРµР¶РґРµРЅРёСЏ С„РѕСЂРјР°Р»СЊРЅС‹С… РїР°СЂР°РјРµС‚СЂРѕРІ Р±РµР· СЃСЃС‹Р»РѕРє РґР»СЏ СЃР±РѕСЂРѕРє /W 4
 
 #define _CRT_SECURE_NO_DEPRECATE
 #define STRSAFE_NO_DEPRECATE
@@ -42,7 +42,7 @@
 #include <stdio.h>
 #include <WCHAR.h>
 
-// Обнаружение утечки памяти CRT
+// РћР±РЅР°СЂСѓР¶РµРЅРёРµ СѓС‚РµС‡РєРё РїР°РјСЏС‚Рё CRT
 #if defined(DEBUG) || defined(_DEBUG)
 #include <crtdbg.h>
 #endif
@@ -63,7 +63,7 @@
 #pragma deprecated("_tcsncat")
 #endif
 
-#pragma warning( disable : 4996 ) // отключить устаревшее предупреждение 
+#pragma warning( disable : 4996 ) // РѕС‚РєР»СЋС‡РёС‚СЊ СѓСЃС‚Р°СЂРµРІС€РµРµ РїСЂРµРґСѓРїСЂРµР¶РґРµРЅРёРµ 
 #include <strsafe.h>
 #pragma warning( default : 4996 ) 
 
@@ -88,7 +88,7 @@
 #define APP_NAME L"MeshConvert"
 
 //--------------------------------------------------------------------------------------
-// Простой вспомогательный класс стека
+// РџСЂРѕСЃС‚РѕР№ РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Р№ РєР»Р°СЃСЃ СЃС‚РµРєР°
 //--------------------------------------------------------------------------------------
 template <class T>
 class CStack

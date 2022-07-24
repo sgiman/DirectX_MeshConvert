@@ -14,7 +14,7 @@
 #define	EndianSwap32(type)  (((type >>24) & 0x000000ff) | ((type >> 8) & 0x0000ff00) | ((type << 8) & 0x00ff0000) | ((type <<24) & 0xff000000) )
 
 //--------------------------------------------------------------------------------------
-// Добавить буфер вершин к сетке
+// Р”РѕР±Р°РІРёС‚СЊ Р±СѓС„РµСЂ РІРµСЂС€РёРЅ Рє СЃРµС‚РєРµ
 //--------------------------------------------------------------------------------------
 INTERMEDIATE_VERTEX_BUFFER* CIntermediateMesh::AddVertexBuffer( INTERMEDIATE_MESH* pMesh,
                                                                 UINT StreamID, 
@@ -47,25 +47,25 @@ INTERMEDIATE_VERTEX_BUFFER* CIntermediateMesh::AddVertexBuffer( INTERMEDIATE_MES
     pVertexBuffer->NumVertices = NumVertices;
     pVertexBuffer->SizeBytes = SizeBytes;
     pVertexBuffer->StrideBytes = StrideBytes;
-    pVertexBuffer->DataOffset = 0;	//TBD later (будет определено позже)
+    pVertexBuffer->DataOffset = 0;	//TBD later (Р±СѓРґРµС‚ РѕРїСЂРµРґРµР»РµРЅРѕ РїРѕР·Р¶Рµ)
     pVertexBuffer->pVertices = new BYTE[ (size_t)SizeBytes ];
     if( !pVertexBuffer->pVertices )
         return NULL;
 
-    // Захватить память
+    // Р—Р°С…РІР°С‚РёС‚СЊ РїР°РјСЏС‚СЊ
     CopyMemory( pVertexBuffer->pVertices, (BYTE*)pBinaryData, (size_t)SizeBytes );
 
-    // Обновить объект сетки
+    // РћР±РЅРѕРІРёС‚СЊ РѕР±СЉРµРєС‚ СЃРµС‚РєРё
     pMesh->VertexBuffers[ StreamID ] = m_VertexBufferArray.GetCount();
 
-    // Добавить Vertex Buffer (VB) в список
+    // Р”РѕР±Р°РІРёС‚СЊ Vertex Buffer (VB) РІ СЃРїРёСЃРѕРє
     m_VertexBufferArray.Push( pVertexBuffer );
     pMesh->NumVertexBuffers++;
     return pVertexBuffer;
 }
 
 //--------------------------------------------------------------------------------------
-// Добавить индексный буфер в сетку
+// Р”РѕР±Р°РІРёС‚СЊ РёРЅРґРµРєСЃРЅС‹Р№ Р±СѓС„РµСЂ РІ СЃРµС‚РєСѓ
 //--------------------------------------------------------------------------------------
 INTERMEDIATE_INDEX_BUFFER* CIntermediateMesh::AddIndexBuffer( INTERMEDIATE_MESH* pMesh,
                                                               UINT64 NumIndices,
@@ -73,33 +73,33 @@ INTERMEDIATE_INDEX_BUFFER* CIntermediateMesh::AddIndexBuffer( INTERMEDIATE_MESH*
                                                               UINT IndexType,
                                                               void* pBinaryData )
 {
-    // Создать новую структуру IndexBuffer (IB)
+    // РЎРѕР·РґР°С‚СЊ РЅРѕРІСѓСЋ СЃС‚СЂСѓРєС‚СѓСЂСѓ IndexBuffer (IB)
     INTERMEDIATE_INDEX_BUFFER* pIndexBuffer = new INTERMEDIATE_INDEX_BUFFER;
     if( !pIndexBuffer )
         return NULL;
 
-    // Загрузить это
+    // Р—Р°РіСЂСѓР·РёС‚СЊ СЌС‚Рѕ
     pIndexBuffer->NumIndices = NumIndices;
     pIndexBuffer->SizeBytes = SizeBytes;
     pIndexBuffer->IndexType = IndexType;
-    pIndexBuffer->DataOffset = 0; //TBD later (будет определено позже)
+    pIndexBuffer->DataOffset = 0; //TBD later (Р±СѓРґРµС‚ РѕРїСЂРµРґРµР»РµРЅРѕ РїРѕР·Р¶Рµ)
     pIndexBuffer->pIndices = new BYTE[ (size_t)SizeBytes ];
     if( !pIndexBuffer->pIndices )
         return NULL;
 
-    // Захватить память
+    // Р—Р°С…РІР°С‚РёС‚СЊ РїР°РјСЏС‚СЊ
     CopyMemory( pIndexBuffer->pIndices, (BYTE*)pBinaryData, (size_t)SizeBytes );
     
-   // Обновить объект сетки
+   // РћР±РЅРѕРІРёС‚СЊ РѕР±СЉРµРєС‚ СЃРµС‚РєРё
     pMesh->IndexBuffer = m_IndexBufferArray.GetCount();
 
-    // Добавить VB в список
+    // Р”РѕР±Р°РІРёС‚СЊ VB РІ СЃРїРёСЃРѕРє
     m_IndexBufferArray.Push( pIndexBuffer );
     return pIndexBuffer;
 }
 
 //--------------------------------------------------------------------------------------
-// Добавить сетку
+// Р”РѕР±Р°РІРёС‚СЊ СЃРµС‚РєСѓ
 //--------------------------------------------------------------------------------------
 INTERMEDIATE_MESH* CIntermediateMesh::AddMesh( char* pszName )
 {
@@ -118,7 +118,7 @@ INTERMEDIATE_MESH* CIntermediateMesh::AddMesh( char* pszName )
 }
 
 //--------------------------------------------------------------------------------------
-// Добавление влияния кадра на сетку
+// Р”РѕР±Р°РІР»РµРЅРёРµ РІР»РёСЏРЅРёСЏ РєР°РґСЂР° РЅР° СЃРµС‚РєСѓ
 //--------------------------------------------------------------------------------------
 void CIntermediateMesh::AddFrameInfluence( INTERMEDIATE_MESH* pMesh,
                                            char* pszName )
@@ -134,7 +134,7 @@ void CIntermediateMesh::AddFrameInfluence( INTERMEDIATE_MESH* pMesh,
 }
 
 //--------------------------------------------------------------------------------------
-// Добавить подмножество в сетку
+// Р”РѕР±Р°РІРёС‚СЊ РїРѕРґРјРЅРѕР¶РµСЃС‚РІРѕ РІ СЃРµС‚РєСѓ
 //--------------------------------------------------------------------------------------
 INTERMEDIATE_SUBSET* CIntermediateMesh::AddSubset( INTERMEDIATE_MESH* pMesh,
                                                    char* pszName,
@@ -166,7 +166,7 @@ INTERMEDIATE_SUBSET* CIntermediateMesh::AddSubset( INTERMEDIATE_MESH* pMesh,
 }
 
 //--------------------------------------------------------------------------------------
-// Добавить кадр
+// Р”РѕР±Р°РІРёС‚СЊ РєР°РґСЂ
 //--------------------------------------------------------------------------------------
 INTERMEDIATE_FRAME* CIntermediateMesh::AddFrame( char* pszName,
                                                  INTERMEDIATE_FRAME* pParent,
@@ -188,7 +188,7 @@ INTERMEDIATE_FRAME* CIntermediateMesh::AddFrame( char* pszName,
     pFrame->Mesh = MeshID;
     pFrame->AnimationDataIndex = INVALID_ANIMATION_DATA;
 
-    // исправить отношения
+    // РёСЃРїСЂР°РІРёС‚СЊ РѕС‚РЅРѕС€РµРЅРёСЏ
     if( pParent )
     {
         pFrame->ParentFrame = pParent->id;
@@ -212,7 +212,7 @@ INTERMEDIATE_FRAME* CIntermediateMesh::AddFrame( char* pszName,
 }
 
 //--------------------------------------------------------------------------------------
-// Добавить материал
+// Р”РѕР±Р°РІРёС‚СЊ РјР°С‚РµСЂРёР°Р»
 //--------------------------------------------------------------------------------------
 INTERMEDIATE_MATERIAL* CIntermediateMesh::AddMaterial( char* pszMaterialName,
                                                             char* pszMaterialInstancePath,
@@ -253,7 +253,7 @@ INTERMEDIATE_MATERIAL* CIntermediateMesh::AddMaterial( char* pszMaterialName,
 }
 
 //--------------------------------------------------------------------------------------
-// Добавить кадр анимации
+// Р”РѕР±Р°РІРёС‚СЊ РєР°РґСЂ Р°РЅРёРјР°С†РёРё
 //--------------------------------------------------------------------------------------
 INTERMEDIATE_ANIMATION_FRAME_DATA* CIntermediateMesh::AddAnimationFrame( char* pszFrameName )
 {
@@ -430,7 +430,7 @@ INTERMEDIATE_ANIMATION_FRAME_DATA* CIntermediateMesh::FindAnimationFrame( char* 
 }
 
 //--------------------------------------------------------------------------------------
-// Выделить все "тики" для данных анимации кости
+// Р’С‹РґРµР»РёС‚СЊ РІСЃРµ "С‚РёРєРё" РґР»СЏ РґР°РЅРЅС‹С… Р°РЅРёРјР°С†РёРё РєРѕСЃС‚Рё
 //--------------------------------------------------------------------------------------
 bool CIntermediateMesh::AllocFrameAnimationData( float Duration )
 {
@@ -450,7 +450,7 @@ bool CIntermediateMesh::AllocFrameAnimationData( float Duration )
 
 
 //--------------------------------------------------------------------------------------------------------
-// Позднее выделение данных анимации костей для костей, которые имеют только преобразование по умолчанию.
+// РџРѕР·РґРЅРµРµ РІС‹РґРµР»РµРЅРёРµ РґР°РЅРЅС‹С… Р°РЅРёРјР°С†РёРё РєРѕСЃС‚РµР№ РґР»СЏ РєРѕСЃС‚РµР№, РєРѕС‚РѕСЂС‹Рµ РёРјРµСЋС‚ С‚РѕР»СЊРєРѕ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ.
 //--------------------------------------------------------------------------------------------------------
 bool CIntermediateMesh::AllocTransformFrameAnimationData( INTERMEDIATE_ANIMATION_FRAME_DATA* pFrameData )
 {
@@ -481,7 +481,7 @@ bool CIntermediateMesh::AllocTransformFrameAnimationData( INTERMEDIATE_ANIMATION
 
 
 //--------------------------------------------------------------------------------------
-// Добавить ключ положения к данным анимации кости
+// Р”РѕР±Р°РІРёС‚СЊ РєР»СЋС‡ РїРѕР»РѕР¶РµРЅРёСЏ Рє РґР°РЅРЅС‹Рј Р°РЅРёРјР°С†РёРё РєРѕСЃС‚Рё
 //--------------------------------------------------------------------------------------
 bool CIntermediateMesh::AddPositionKey( INTERMEDIATE_ANIMATION_FRAME_DATA* pFrame, float Time, float x, float y, float z )
 {
@@ -496,7 +496,7 @@ bool CIntermediateMesh::AddPositionKey( INTERMEDIATE_ANIMATION_FRAME_DATA* pFram
 
 
 //--------------------------------------------------------------------------------------
-// Добавить ключ ориентации к данным анимации кости
+// Р”РѕР±Р°РІРёС‚СЊ РєР»СЋС‡ РѕСЂРёРµРЅС‚Р°С†РёРё Рє РґР°РЅРЅС‹Рј Р°РЅРёРјР°С†РёРё РєРѕСЃС‚Рё
 //--------------------------------------------------------------------------------------
 bool CIntermediateMesh::AddOrientationKey( INTERMEDIATE_ANIMATION_FRAME_DATA* pFrame, float Time, float w, float x, float y, float z )
 {
@@ -510,7 +510,7 @@ bool CIntermediateMesh::AddOrientationKey( INTERMEDIATE_ANIMATION_FRAME_DATA* pF
 }
 
 //--------------------------------------------------------------------------------------
-// Добавитеь ключ масштаба к данным анимации кости
+// Р”РѕР±Р°РІРёС‚РµСЊ РєР»СЋС‡ РјР°СЃС€С‚Р°Р±Р° Рє РґР°РЅРЅС‹Рј Р°РЅРёРјР°С†РёРё РєРѕСЃС‚Рё
 //--------------------------------------------------------------------------------------
 bool CIntermediateMesh::AddScaleKey( INTERMEDIATE_ANIMATION_FRAME_DATA* pFrame, float Time, float x, float y, float z )
 {
@@ -524,27 +524,27 @@ bool CIntermediateMesh::AddScaleKey( INTERMEDIATE_ANIMATION_FRAME_DATA* pFrame, 
 }
 
 //--------------------------------------------------------------------------------------
-// Фиксируем сетку
+// Р¤РёРєСЃРёСЂСѓРµРј СЃРµС‚РєСѓ
 //
-// 1. Отображение всей информации о костных тиках между ключевыми кадрами
-// 2. Преобразование вершин меша в мировое пространство
+// 1. РћС‚РѕР±СЂР°Р¶РµРЅРёРµ РІСЃРµР№ РёРЅС„РѕСЂРјР°С†РёРё Рѕ РєРѕСЃС‚РЅС‹С… С‚РёРєР°С… РјРµР¶РґСѓ РєР»СЋС‡РµРІС‹РјРё РєР°РґСЂР°РјРё
+// 2. РџСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ РІРµСЂС€РёРЅ РјРµС€Р° РІ РјРёСЂРѕРІРѕРµ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРѕ
 //--------------------------------------------------------------------------------------
 bool CIntermediateMesh::FixMesh()
 {
-    //убедитесь, что у нас есть данные анимации
+    //СѓР±РµРґРёС‚РµСЃСЊ, С‡С‚Рѕ Сѓ РЅР°СЃ РµСЃС‚СЊ РґР°РЅРЅС‹Рµ Р°РЅРёРјР°С†РёРё
     if( m_NumTicks < 1 )
     {
         AllocFrameAnimationData( 0.5f );
     }
 
-    //сначала исправитеь все ключи анимации для костей
+    //СЃРЅР°С‡Р°Р»Р° РёСЃРїСЂР°РІРёС‚РµСЊ РІСЃРµ РєР»СЋС‡Рё Р°РЅРёРјР°С†РёРё РґР»СЏ РєРѕСЃС‚РµР№
     for( UINT i=0; i<m_AnimationFrameData.GetCount(); i++ )
     {
         INTERMEDIATE_ANIMATION_FRAME_DATA* pFrame = m_AnimationFrameData.GetAt( i );
         FixFrameTicks( pFrame );
     }
 
-    //найти ограничивающие рамки для всех сеток
+    //РЅР°Р№С‚Рё РѕРіСЂР°РЅРёС‡РёРІР°СЋС‰РёРµ СЂР°РјРєРё РґР»СЏ РІСЃРµС… СЃРµС‚РѕРє
     for( UINT i=0; i<m_MeshArray.GetCount(); i++ )
     {
         INTERMEDIATE_MESH* pMesh = m_MeshArray.GetAt(i);
@@ -562,16 +562,16 @@ bool CIntermediateMesh::FixMesh()
 }
 
 //--------------------------------------------------------------------------------------
-// Endian заменяет буферы вершин на сетки XML
+// Endian Р·Р°РјРµРЅСЏРµС‚ Р±СѓС„РµСЂС‹ РІРµСЂС€РёРЅ РЅР° СЃРµС‚РєРё XML
 //--------------------------------------------------------------------------------------
 bool CIntermediateMesh::EndianSwap()
 {
-    // Endian поменять местами VB
+    // Endian РїРѕРјРµРЅСЏС‚СЊ РјРµСЃС‚Р°РјРё VB
     for( UINT s=0; s<m_VertexBufferArray.GetCount(); s++ )
     {
         INTERMEDIATE_VERTEX_BUFFER* pBuffer = m_VertexBufferArray.GetAt(s);
 
-        //TODO:  Это сломается, если какие-либо данные вершины не являются 32-битными.
+        //TODO:  Р­С‚Рѕ СЃР»РѕРјР°РµС‚СЃСЏ, РµСЃР»Рё РєР°РєРёРµ-Р»РёР±Рѕ РґР°РЅРЅС‹Рµ РІРµСЂС€РёРЅС‹ РЅРµ СЏРІР»СЏСЋС‚СЃСЏ 32-Р±РёС‚РЅС‹РјРё.
         DWORD* pdwords = (DWORD*)pBuffer->pVertices;
         for( UINT64 i=0; i<pBuffer->SizeBytes/4; i++ )
         {
@@ -579,7 +579,7 @@ bool CIntermediateMesh::EndianSwap()
         }
     }
 
-    // Endian поменять местами IB
+    // Endian РїРѕРјРµРЅСЏС‚СЊ РјРµСЃС‚Р°РјРё IB
     for( UINT s=0; s<m_IndexBufferArray.GetCount(); s++ )
     {
         INTERMEDIATE_INDEX_BUFFER* pBuffer = m_IndexBufferArray.GetAt(s);
@@ -649,7 +649,7 @@ bool CIntermediateMesh::GenerateTangents( IDirect3DDevice9* pd3dDevice )
     {
         pMesh = m_MeshArray.GetAt(i);
 
-        //только прямые касательные на первом буфере
+        //С‚РѕР»СЊРєРѕ РїСЂСЏРјС‹Рµ РєР°СЃР°С‚РµР»СЊРЅС‹Рµ РЅР° РїРµСЂРІРѕРј Р±СѓС„РµСЂРµ
         INTERMEDIATE_VERTEX_BUFFER* pVB = m_VertexBufferArray.GetAt( pMesh->VertexBuffers[0] );
         INTERMEDIATE_INDEX_BUFFER* pIB = m_IndexBufferArray.GetAt( pMesh->IndexBuffer );
         
@@ -657,7 +657,7 @@ bool CIntermediateMesh::GenerateTangents( IDirect3DDevice9* pd3dDevice )
         if( pIB->IndexType == IT_32BIT )
             dwOptions |= D3DXMESH_32BIT;
 
-        // создать сетку
+        // СЃРѕР·РґР°С‚СЊ СЃРµС‚РєСѓ
         hr = D3DXCreateMesh( (DWORD)pIB->NumIndices/3,
                              (DWORD)pVB->NumVertices,
                              dwOptions,
@@ -667,7 +667,7 @@ bool CIntermediateMesh::GenerateTangents( IDirect3DDevice9* pd3dDevice )
         if(FAILED(hr))
             goto Error;
 
-        // Заполнить вершинами
+        // Р—Р°РїРѕР»РЅРёС‚СЊ РІРµСЂС€РёРЅР°РјРё
         void* pLockedData = NULL;
         hr = pD3DXMesh->LockVertexBuffer( 0, &pLockedData );
         if(FAILED(hr))
@@ -675,14 +675,14 @@ bool CIntermediateMesh::GenerateTangents( IDirect3DDevice9* pd3dDevice )
         CopyMemory( pLockedData, pVB->pVertices, (UINT)pVB->SizeBytes );
         pD3DXMesh->UnlockVertexBuffer();
 
-        // Заполнить индексами
+        // Р—Р°РїРѕР»РЅРёС‚СЊ РёРЅРґРµРєСЃР°РјРё
         hr = pD3DXMesh->LockIndexBuffer( 0, &pLockedData );
         if(FAILED(hr))
             goto Error;
         CopyMemory( pLockedData, pIB->pIndices, (UINT)pIB->SizeBytes );
         pD3DXMesh->UnlockIndexBuffer();
 
-        // ген. соседних полигонов 
+        // РіРµРЅ. СЃРѕСЃРµРґРЅРёС… РїРѕР»РёРіРѕРЅРѕРІ 
         pdwAdjacency = new DWORD[ 3*pD3DXMesh->GetNumFaces() ];
         if( !pdwAdjacency )
             goto Error;
@@ -704,7 +704,7 @@ bool CIntermediateMesh::GenerateTangents( IDirect3DDevice9* pd3dDevice )
         if( IsSematicPresent( D3DDECLUSAGE_NORMAL, pVB->Decl, MAX_VERTEX_ELEMENTS ) )
             normal = D3DDECLUSAGE_NORMAL;
 
-        // ген. касательных
+        // РіРµРЅ. РєР°СЃР°С‚РµР»СЊРЅС‹С…
         DWORD dwFlags = D3DXTANGENT_GENERATE_IN_PLACE;
         hr = D3DXComputeTangentFrameEx(pD3DXMesh, 
                                         texcoord, 
@@ -718,7 +718,7 @@ bool CIntermediateMesh::GenerateTangents( IDirect3DDevice9* pd3dDevice )
         if(FAILED(hr))
             goto Error;
 
-        // Скопировать новые данные повторно
+        // РЎРєРѕРїРёСЂРѕРІР°С‚СЊ РЅРѕРІС‹Рµ РґР°РЅРЅС‹Рµ РїРѕРІС‚РѕСЂРЅРѕ
         hr = pD3DXMesh->LockVertexBuffer( 0, &pLockedData );
         if(FAILED(hr))
             goto Error;
@@ -747,7 +747,7 @@ bool CIntermediateMesh::GenerateNormals( IDirect3DDevice9* pd3dDevice )
     {
         pMesh = m_MeshArray.GetAt(i);
 
-        //только прямые касательные на первом буфере
+        //С‚РѕР»СЊРєРѕ РїСЂСЏРјС‹Рµ РєР°СЃР°С‚РµР»СЊРЅС‹Рµ РЅР° РїРµСЂРІРѕРј Р±СѓС„РµСЂРµ
         INTERMEDIATE_VERTEX_BUFFER* pVB = m_VertexBufferArray.GetAt( pMesh->VertexBuffers[0] );
         INTERMEDIATE_INDEX_BUFFER* pIB = m_IndexBufferArray.GetAt( pMesh->IndexBuffer );
         
@@ -755,7 +755,7 @@ bool CIntermediateMesh::GenerateNormals( IDirect3DDevice9* pd3dDevice )
         if( pIB->IndexType == IT_32BIT )
             dwOptions |= D3DXMESH_32BIT;
 
-        // создать сетку
+        // СЃРѕР·РґР°С‚СЊ СЃРµС‚РєСѓ
         hr = D3DXCreateMesh( (DWORD)pIB->NumIndices/3,
                              (DWORD)pVB->NumVertices,
                              dwOptions,
@@ -765,7 +765,7 @@ bool CIntermediateMesh::GenerateNormals( IDirect3DDevice9* pd3dDevice )
         if(FAILED(hr))
             goto Error;
 
-        // Заполнить вершинами
+        // Р—Р°РїРѕР»РЅРёС‚СЊ РІРµСЂС€РёРЅР°РјРё
         void* pLockedData = NULL;
         hr = pD3DXMesh->LockVertexBuffer( 0, &pLockedData );
         if(FAILED(hr))
@@ -773,14 +773,14 @@ bool CIntermediateMesh::GenerateNormals( IDirect3DDevice9* pd3dDevice )
         CopyMemory( pLockedData, pVB->pVertices, (UINT)pVB->SizeBytes );
         pD3DXMesh->UnlockVertexBuffer();
 
-        // Заполните индексами
+        // Р—Р°РїРѕР»РЅРёС‚Рµ РёРЅРґРµРєСЃР°РјРё
         hr = pD3DXMesh->LockIndexBuffer( 0, &pLockedData );
         if(FAILED(hr))
             goto Error;
         CopyMemory( pLockedData, pIB->pIndices, (UINT)pIB->SizeBytes );
         pD3DXMesh->UnlockIndexBuffer();
 
-        // ген. соседних полигонов
+        // РіРµРЅ. СЃРѕСЃРµРґРЅРёС… РїРѕР»РёРіРѕРЅРѕРІ
         pdwAdjacency = new DWORD[ 3*pD3DXMesh->GetNumFaces() ];
         if( !pdwAdjacency )
             goto Error;
@@ -802,12 +802,12 @@ bool CIntermediateMesh::GenerateNormals( IDirect3DDevice9* pd3dDevice )
         if( IsSematicPresent( D3DDECLUSAGE_NORMAL, pVB->Decl, MAX_VERTEX_ELEMENTS ) )
             normal = D3DDECLUSAGE_NORMAL;
 
-        // ген. касательных
+        // РіРµРЅ. РєР°СЃР°С‚РµР»СЊРЅС‹С…
         hr = D3DXComputeNormals( pD3DXMesh, pdwAdjacency );
         if(FAILED(hr))
             goto Error;
 
-        // Скопировать новые данные опять
+        // РЎРєРѕРїРёСЂРѕРІР°С‚СЊ РЅРѕРІС‹Рµ РґР°РЅРЅС‹Рµ РѕРїСЏС‚СЊ
         hr = pD3DXMesh->LockVertexBuffer( 0, &pLockedData );
         if(FAILED(hr))
             goto Error;
@@ -846,7 +846,7 @@ bool CIntermediateMesh::ConvertVertexData( IDirect3DDevice9* pd3dDevice, D3DVERT
 
 
 //--------------------------------------------------------------------------------------
-// Сохранить промежуточные данные в виде x-файла
+// РЎРѕС…СЂР°РЅРёС‚СЊ РїСЂРѕРјРµР¶СѓС‚РѕС‡РЅС‹Рµ РґР°РЅРЅС‹Рµ РІ РІРёРґРµ x-С„Р°Р№Р»Р°
 //--------------------------------------------------------------------------------------
 bool CIntermediateMesh::SaveAsXFile( IDirect3DDevice9* pd3dDevice, WCHAR* szFileName, bool bBinary )
 {
@@ -860,12 +860,12 @@ bool CIntermediateMesh::SaveAsXFile( IDirect3DDevice9* pd3dDevice, WCHAR* szFile
     INTERMEDIATE_VERTEX_BUFFER* pVB = NULL;
     INTERMEDIATE_INDEX_BUFFER* pIB = NULL;
 
-    // Сделать только первую сетку
+    // РЎРґРµР»Р°С‚СЊ С‚РѕР»СЊРєРѕ РїРµСЂРІСѓСЋ СЃРµС‚РєСѓ
     pMesh = m_MeshArray.GetAt(0);
     if( !pMesh )
         goto Error;
 
-    // Сделать только первый VB
+    // РЎРґРµР»Р°С‚СЊ С‚РѕР»СЊРєРѕ РїРµСЂРІС‹Р№ VB
     pVB = m_VertexBufferArray.GetAt( pMesh->VertexBuffers[0] );
     if( !pVB )
         goto Error;
@@ -878,7 +878,7 @@ bool CIntermediateMesh::SaveAsXFile( IDirect3DDevice9* pd3dDevice, WCHAR* szFile
     if( pIB->IndexType == IT_32BIT )
         dwOptions |= D3DXMESH_32BIT;
 
-    // создать сетку
+    // СЃРѕР·РґР°С‚СЊ СЃРµС‚РєСѓ
     hr = D3DXCreateMesh( (DWORD)pIB->NumIndices/3,
                          (DWORD)pVB->NumVertices,
                          dwOptions,
@@ -888,7 +888,7 @@ bool CIntermediateMesh::SaveAsXFile( IDirect3DDevice9* pd3dDevice, WCHAR* szFile
     if(FAILED(hr))
         goto Error;
 
-    // Заполнить вершины
+    // Р—Р°РїРѕР»РЅРёС‚СЊ РІРµСЂС€РёРЅС‹
     void* pData;
     hr = pD3DXMesh->LockVertexBuffer( 0, &pData );
     if(FAILED(hr))
@@ -896,20 +896,20 @@ bool CIntermediateMesh::SaveAsXFile( IDirect3DDevice9* pd3dDevice, WCHAR* szFile
     CopyMemory( pData, pVB->pVertices, (size_t)pVB->SizeBytes );
     pD3DXMesh->UnlockVertexBuffer();
 
-    // Индексы заполнения
+    // РРЅРґРµРєСЃС‹ Р·Р°РїРѕР»РЅРµРЅРёСЏ
     hr = pD3DXMesh->LockIndexBuffer( 0, &pData );
     if(FAILED(hr))
         goto Error;
     CopyMemory( pData, pIB->pIndices, (size_t)pIB->SizeBytes );
     pD3DXMesh->UnlockIndexBuffer();
 
-    // Заблокировать буфер атрибутов (LockAttributeBuffer)
+    // Р—Р°Р±Р»РѕРєРёСЂРѕРІР°С‚СЊ Р±СѓС„РµСЂ Р°С‚СЂРёР±СѓС‚РѕРІ (LockAttributeBuffer)
     DWORD* pdwAttributes;
     hr = pD3DXMesh->LockAttributeBuffer( 0, &pdwAttributes );
     if(FAILED(hr))
         goto Error;
 
-    // Заполнить подмножества (подсети)
+    // Р—Р°РїРѕР»РЅРёС‚СЊ РїРѕРґРјРЅРѕР¶РµСЃС‚РІР° (РїРѕРґСЃРµС‚Рё)
     pAttributes = new D3DXATTRIBUTERANGE[ pMesh->NumSubsets ];
     if( !pAttributes )
         goto Error;
@@ -935,7 +935,7 @@ bool CIntermediateMesh::SaveAsXFile( IDirect3DDevice9* pd3dDevice, WCHAR* szFile
     if(FAILED(hr))
         goto Error;
 
-    // Заполнить материалы
+    // Р—Р°РїРѕР»РЅРёС‚СЊ РјР°С‚РµСЂРёР°Р»С‹
     if( m_MaterialArray.GetCount() > 0 )
     {
         pMaterials = new D3DXMATERIAL[ (size_t)m_MaterialArray.GetCount() ];
@@ -957,7 +957,7 @@ bool CIntermediateMesh::SaveAsXFile( IDirect3DDevice9* pd3dDevice, WCHAR* szFile
         }
     }
 
-    // Сохранить все это
+    // РЎРѕС…СЂР°РЅРёС‚СЊ РІСЃРµ СЌС‚Рѕ
     DWORD dwFormat = D3DXF_FILEFORMAT_TEXT;
     if( bBinary )
         dwFormat = D3DXF_FILEFORMAT_BINARY;
@@ -981,7 +981,7 @@ Error:
 }
 
 //--------------------------------------------------------------------------------------
-// Помощник для выравнивания смещения до 4k
+// РџРѕРјРѕС‰РЅРёРє РґР»СЏ РІС‹СЂР°РІРЅРёРІР°РЅРёСЏ СЃРјРµС‰РµРЅРёСЏ РґРѕ 4k
 //--------------------------------------------------------------------------------------
 UINT64 Align4k( UINT64 Offset )
 {
@@ -991,7 +991,7 @@ UINT64 Align4k( UINT64 Offset )
 }
 
 //--------------------------------------------------------------------------------------
-// Вывести бинарный файл sdkmesh
+// Р’С‹РІРµСЃС‚Рё Р±РёРЅР°СЂРЅС‹Р№ С„Р°Р№Р» sdkmesh
 //--------------------------------------------------------------------------------------
 bool CIntermediateMesh::SaveAsSDKMesh( WCHAR* szFileName )
 {
@@ -1009,7 +1009,7 @@ bool CIntermediateMesh::SaveAsSDKMesh( WCHAR* szFileName )
     HeaderSize += m_VertexBufferArray.GetCount()*sizeof(SDKMESH_VERTEX_BUFFER_HEADER);
     HeaderSize += m_IndexBufferArray.GetCount()*sizeof(SDKMESH_INDEX_BUFFER_HEADER);
 
-    // Рассчитать размер для всего остального
+    // Р Р°СЃСЃС‡РёС‚Р°С‚СЊ СЂР°Р·РјРµСЂ РґР»СЏ РІСЃРµРіРѕ РѕСЃС‚Р°Р»СЊРЅРѕРіРѕ
     UINT64 StaticDataSize = 0;
     StaticDataSize += m_MeshArray.GetCount()*sizeof(SDKMESH_MESH);
     StaticDataSize += m_SubsetArray.GetCount()*sizeof(SDKMESH_SUBSET);
@@ -1023,7 +1023,7 @@ bool CIntermediateMesh::SaveAsSDKMesh( WCHAR* szFileName )
         NonBufferDataSize += pMesh->NumFrameInfluences * sizeof(UINT);
     }
 
-    // Вычислить размер данных всех вершин и индексов
+    // Р’С‹С‡РёСЃР»РёС‚СЊ СЂР°Р·РјРµСЂ РґР°РЅРЅС‹С… РІСЃРµС… РІРµСЂС€РёРЅ Рё РёРЅРґРµРєСЃРѕРІ
     UINT64 BufferDataSize = 0;
     for( UINT i=0; i<m_VertexBufferArray.GetCount(); i++ )
     {
@@ -1056,13 +1056,13 @@ bool CIntermediateMesh::SaveAsSDKMesh( WCHAR* szFileName )
     fileheader.MaterialDataOffset = fileheader.FrameDataOffset + m_FrameArray.GetCount() * sizeof(SDKMESH_FRAME);
 
     /////////////////////////////
-    //Записать заголовок
+    //Р—Р°РїРёСЃР°С‚СЊ Р·Р°РіРѕР»РѕРІРѕРє
     retval = fwrite( &fileheader, sizeof(SDKMESH_HEADER), 1, fp );
     if( retval != 1 )
         goto Error;
 
     /////////////////////////////
-    //Заголовки VB
+    //Р—Р°РіРѕР»РѕРІРєРё VB
     UINT64 BufferDataOffset = HeaderSize + NonBufferDataSize;
     for( UINT i=0; i<m_VertexBufferArray.GetCount(); i++ )
     {
@@ -1076,7 +1076,7 @@ bool CIntermediateMesh::SaveAsSDKMesh( WCHAR* szFileName )
     }
 
     /////////////////////////////
-    //Заголовки IB 
+    //Р—Р°РіРѕР»РѕРІРєРё IB 
     for( UINT i=0; i<m_IndexBufferArray.GetCount(); i++ )
     {
         SDKMESH_INDEX_BUFFER_HEADER* pIBH = m_IndexBufferArray.GetAt(i);
@@ -1089,7 +1089,7 @@ bool CIntermediateMesh::SaveAsSDKMesh( WCHAR* szFileName )
     }
 
     /////////////////////////////
-    //Сетки
+    //РЎРµС‚РєРё
     UINT64 SubsetListDataOffset = HeaderSize + StaticDataSize;
     for( UINT i=0; i<m_MeshArray.GetCount(); i++ )
     {
@@ -1105,7 +1105,7 @@ bool CIntermediateMesh::SaveAsSDKMesh( WCHAR* szFileName )
     }
 
     /////////////////////////////
-    //Подмножества (Subset)
+    //РџРѕРґРјРЅРѕР¶РµСЃС‚РІР° (Subset)
     for( UINT i=0; i<m_SubsetArray.GetCount(); i++ )
     {
         SDKMESH_SUBSET* pSubset = m_SubsetArray.GetAt(i);
@@ -1115,7 +1115,7 @@ bool CIntermediateMesh::SaveAsSDKMesh( WCHAR* szFileName )
     }
 
     /////////////////////////////
-    //Кадры
+    //РљР°РґСЂС‹
     for( UINT i=0; i<m_FrameArray.GetCount(); i++ )
     {
         SDKMESH_FRAME* pFrame = m_FrameArray.GetAt(i);
@@ -1125,7 +1125,7 @@ bool CIntermediateMesh::SaveAsSDKMesh( WCHAR* szFileName )
     }
 
     /////////////////////////////
-    //Материалы
+    //РњР°С‚РµСЂРёР°Р»С‹
     for( UINT i=0; i<m_MaterialArray.GetCount(); i++ )
     {
         SDKMESH_MATERIAL* pMaterial = m_MaterialArray.GetAt(i);
@@ -1135,7 +1135,7 @@ bool CIntermediateMesh::SaveAsSDKMesh( WCHAR* szFileName )
     }
 
     /////////////////////////////
-    //Списки влияния поднаборов и фреймов
+    //РЎРїРёСЃРєРё РІР»РёСЏРЅРёСЏ РїРѕРґРЅР°Р±РѕСЂРѕРІ Рё С„СЂРµР№РјРѕРІ
     for( UINT i=0; i<m_MeshArray.GetCount(); i++ )
     {
         INTERMEDIATE_MESH* pMesh = m_MeshArray.GetAt(i);
@@ -1159,7 +1159,7 @@ bool CIntermediateMesh::SaveAsSDKMesh( WCHAR* szFileName )
     }
 
     /////////////////////////////
-    //Данные вершины
+    //Р”Р°РЅРЅС‹Рµ РІРµСЂС€РёРЅС‹
     for( UINT i=0; i<m_VertexBufferArray.GetCount(); i++ )
     {
         INTERMEDIATE_VERTEX_BUFFER* pVBH = m_VertexBufferArray.GetAt(i);
@@ -1167,7 +1167,7 @@ bool CIntermediateMesh::SaveAsSDKMesh( WCHAR* szFileName )
         if( retval != 1 )
             goto Error;
 
-        //pad (записать в файл)
+        //pad (Р·Р°РїРёСЃР°С‚СЊ РІ С„Р°Р№Р»)
         UINT64 alignsize = Align4k( pVBH->SizeBytes );
         BYTE nothing = 0;
         for( UINT64 b=0; b<alignsize - pVBH->SizeBytes; b++ )
@@ -1179,7 +1179,7 @@ bool CIntermediateMesh::SaveAsSDKMesh( WCHAR* szFileName )
     }
 
     /////////////////////////////
-    //Данные индекса
+    //Р”Р°РЅРЅС‹Рµ РёРЅРґРµРєСЃР°
     for( UINT i=0; i<m_IndexBufferArray.GetCount(); i++ )
     {
         INTERMEDIATE_INDEX_BUFFER* pIBH = m_IndexBufferArray.GetAt(i);
@@ -1188,7 +1188,7 @@ bool CIntermediateMesh::SaveAsSDKMesh( WCHAR* szFileName )
         if( retval != 1 )
             goto Error;
 
-        //pad (записать в файл)
+        //pad (Р·Р°РїРёСЃР°С‚СЊ РІ С„Р°Р№Р»)
         UINT64 alignsize = Align4k( pIBH->SizeBytes );
         BYTE nothing = 0;
         for( UINT64 b=0; b<alignsize - pIBH->SizeBytes; b++ )
@@ -1206,7 +1206,7 @@ Error:
 }
 
 //--------------------------------------------------------------------------------------
-// Сохранить данные анимации в отдельном файле
+// РЎРѕС…СЂР°РЅРёС‚СЊ РґР°РЅРЅС‹Рµ Р°РЅРёРјР°С†РёРё РІ РѕС‚РґРµР»СЊРЅРѕРј С„Р°Р№Р»Рµ
 //--------------------------------------------------------------------------------------
 bool CIntermediateMesh::SaveAnimationData( WCHAR* szFileName )
 {
@@ -1230,11 +1230,11 @@ bool CIntermediateMesh::SaveAnimationData( WCHAR* szFileName )
     fileheader.AnimationDataOffset = sizeof(SDKANIMATION_FILE_HEADER);
 
     /////////////////////////////////
-    //Записать заголовок
+    //Р—Р°РїРёСЃР°С‚СЊ Р·Р°РіРѕР»РѕРІРѕРє
     retval = fwrite( &fileheader, sizeof(SDKANIMATION_FILE_HEADER), 1, fp );
 
     /////////////////////////////////
-    //Записать frame data (анимация)
+    //Р—Р°РїРёСЃР°С‚СЊ frame data (Р°РЅРёРјР°С†РёСЏ)
     for( UINT i=0; i<m_AnimationFrameData.GetCount(); i++ )
     {
         SDKANIMATION_FRAME_DATA* pFrameData = m_AnimationFrameData.GetAt(i);
@@ -1244,7 +1244,7 @@ bool CIntermediateMesh::SaveAnimationData( WCHAR* szFileName )
     }
 
     /////////////////////////////////
-    //Записать frame data (анимация)
+    //Р—Р°РїРёСЃР°С‚СЊ frame data (Р°РЅРёРјР°С†РёСЏ)
     for( UINT i=0; i<m_AnimationFrameData.GetCount(); i++ )
     {
         INTERMEDIATE_ANIMATION_FRAME_DATA* pFrameData = m_AnimationFrameData.GetAt(i);
@@ -1258,7 +1258,7 @@ Error:
 }
 
 //--------------------------------------------------------------------------------------
-// Помощник для поиска следующего используемого ключа в списке тиков
+// РџРѕРјРѕС‰РЅРёРє РґР»СЏ РїРѕРёСЃРєР° СЃР»РµРґСѓСЋС‰РµРіРѕ РёСЃРїРѕР»СЊР·СѓРµРјРѕРіРѕ РєР»СЋС‡Р° РІ СЃРїРёСЃРєРµ С‚РёРєРѕРІ
 //--------------------------------------------------------------------------------------
 UINT FindNextUsedKey( bool* boolArray, UINT iStart, UINT iMax )
 {
@@ -1276,17 +1276,17 @@ UINT FindNextUsedKey( bool* boolArray, UINT iStart, UINT iMax )
 
 
 //--------------------------------------------------------------------------------------
-// Исправление тиков кадра (FixFrameTicks)
+// РСЃРїСЂР°РІР»РµРЅРёРµ С‚РёРєРѕРІ РєР°РґСЂР° (FixFrameTicks)
 //
-// 1. Убедиться, что первый тик является позой привязки
-// 2. Lerp позиционирует тики между ключевыми кадрами
-// 3. Отметки ориентации Slerp между ключевыми кадрами
+// 1. РЈР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РїРµСЂРІС‹Р№ С‚РёРє СЏРІР»СЏРµС‚СЃСЏ РїРѕР·РѕР№ РїСЂРёРІСЏР·РєРё
+// 2. Lerp РїРѕР·РёС†РёРѕРЅРёСЂСѓРµС‚ С‚РёРєРё РјРµР¶РґСѓ РєР»СЋС‡РµРІС‹РјРё РєР°РґСЂР°РјРё
+// 3. РћС‚РјРµС‚РєРё РѕСЂРёРµРЅС‚Р°С†РёРё Slerp РјРµР¶РґСѓ РєР»СЋС‡РµРІС‹РјРё РєР°РґСЂР°РјРё
 //--------------------------------------------------------------------------------------
 bool CIntermediateMesh::FixFrameTicks( INTERMEDIATE_ANIMATION_FRAME_DATA* pFrame )
 {
     D3DXVECTOR3 v3Start,v3End,v3Delta;
 
-    //Убедиться, что первая клавиша имеет по крайней мере позу привязки
+    //РЈР±РµРґРёС‚СЊСЃСЏ, С‡С‚Рѕ РїРµСЂРІР°СЏ РєР»Р°РІРёС€Р° РёРјРµРµС‚ РїРѕ РєСЂР°Р№РЅРµР№ РјРµСЂРµ РїРѕР·Сѓ РїСЂРёРІСЏР·РєРё
     if( !pFrame->bHasKey )
     {
         INTERMEDIATE_FRAME* pFBind = FindFrame( pFrame->FrameName );
@@ -1314,7 +1314,7 @@ bool CIntermediateMesh::FixFrameTicks( INTERMEDIATE_ANIMATION_FRAME_DATA* pFrame
     //position
     for( UINT i=0; i<m_NumTicks; i++ )
     {
-        //найти начало
+        //РЅР°Р№С‚Рё РЅР°С‡Р°Р»Рѕ
         UINT iStart = FindNextUsedKey( pFrame->bPosKeySet, i, m_NumTicks );
         UINT iEnd = FindNextUsedKey( pFrame->bPosKeySet, iStart+1, m_NumTicks );
 
@@ -1342,7 +1342,7 @@ bool CIntermediateMesh::FixFrameTicks( INTERMEDIATE_ANIMATION_FRAME_DATA* pFrame
     //orientation
     for( UINT i=0; i<m_NumTicks; i++ )
     {
-        //найти начало
+        //РЅР°Р№С‚Рё РЅР°С‡Р°Р»Рѕ
         UINT iStart = FindNextUsedKey( pFrame->bOrientKeySet, i, m_NumTicks );
         UINT iEnd = FindNextUsedKey( pFrame->bOrientKeySet, iStart+1, m_NumTicks );
 
@@ -1382,7 +1382,7 @@ bool CIntermediateMesh::FixFrameTicks( INTERMEDIATE_ANIMATION_FRAME_DATA* pFrame
     //scale
     for( UINT i=0; i<m_NumTicks; i++ )
     {
-        //найти начало
+        //РЅР°Р№С‚Рё РЅР°С‡Р°Р»Рѕ
         UINT iStart = FindNextUsedKey( pFrame->bScaleKeySet, i, m_NumTicks );
         UINT iEnd = FindNextUsedKey( pFrame->bScaleKeySet, iStart+1, m_NumTicks );
 
@@ -1422,7 +1422,7 @@ bool CIntermediateMesh::SolidifyFrameAnimationData(INTERMEDIATE_ANIMATION_FRAME_
 }
 
 //-----------------------------------------------------------------------------------------------------
-// Переместить все преобразования костей в абсолютное пространство (aka, remove heirarchy necessity)
+// РџРµСЂРµРјРµСЃС‚РёС‚СЊ РІСЃРµ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёСЏ РєРѕСЃС‚РµР№ РІ Р°Р±СЃРѕР»СЋС‚РЅРѕРµ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРѕ (aka, remove heirarchy necessity)
 //-----------------------------------------------------------------------------------------------------
 /*bool CIntermediateMesh::CalculateBoneFrameData( INTERMEDIATE_ANIMATION_FRAME_DATA* pBone, BONE_FRAME* pFrame, UINT64 iTick )
 {
@@ -1468,7 +1468,7 @@ bool CIntermediateMesh::SolidifyFrameAnimationData(INTERMEDIATE_ANIMATION_FRAME_
         if( quatLocal.w == 0 && quatLocal.x == 0 && quatLocal.y == 0 && quatLocal.z == 0 )
             D3DXQuaternionIdentity( &quatLocal );
 
-        //родительский кватернион
+        //СЂРѕРґРёС‚РµР»СЊСЃРєРёР№ РєРІР°С‚РµСЂРЅРёРѕРЅ
         D3DXQUATERNION quatParent;
         D3DXMATRIX mTotalRot = mTotal;
         D3DXQuaternionRotationMatrix( &quatParent, &mTotalRot );
@@ -1497,7 +1497,7 @@ bool CIntermediateMesh::SolidifyFrameAnimationData(INTERMEDIATE_ANIMATION_FRAME_
 }*/
 
 //--------------------------------------------------------------------------------------
-// Преобразование данных вершин (ConvertVertexData)
+// РџСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ РґР°РЅРЅС‹С… РІРµСЂС€РёРЅ (ConvertVertexData)
 //--------------------------------------------------------------------------------------
 bool CIntermediateMesh::ConvertVertexData( IDirect3DDevice9* pd3dDevice, 
                                            void* pInVertices, UINT64 NumInVertices, D3DVERTEXELEMENT9* pInDecl, UINT NumInElements, 
@@ -1508,7 +1508,7 @@ bool CIntermediateMesh::ConvertVertexData( IDirect3DDevice9* pd3dDevice,
     ID3DXMesh* pInMesh = NULL;
     ID3DXMesh* pOutMesh = NULL;
 
-    // создать сетку
+    // СЃРѕР·РґР°С‚СЊ СЃРµС‚РєСѓ
     hr = D3DXCreateMesh( (DWORD)NumInVertices/3,
                          (DWORD)NumInVertices,
                          D3DXMESH_SYSTEMMEM | D3DXMESH_32BIT,
@@ -1528,7 +1528,7 @@ bool CIntermediateMesh::ConvertVertexData( IDirect3DDevice9* pd3dDevice,
     CopyMemory( pLockedVerts, pInVertices, VBInSize );
     pInMesh->UnlockVertexBuffer();
 
-    //клонировать это на новые спецификации
+    //РєР»РѕРЅРёСЂРѕРІР°С‚СЊ СЌС‚Рѕ РЅР° РЅРѕРІС‹Рµ СЃРїРµС†РёС„РёРєР°С†РёРё
     hr = pInMesh->CloneMesh( D3DXMESH_SYSTEMMEM | D3DXMESH_32BIT,
                         pOutDecl,
                         pd3dDevice,
@@ -1536,7 +1536,7 @@ bool CIntermediateMesh::ConvertVertexData( IDirect3DDevice9* pd3dDevice,
     if(FAILED(hr))
         goto Error;
 
-    // выделить место для новых вершин
+    // РІС‹РґРµР»РёС‚СЊ РјРµСЃС‚Рѕ РґР»СЏ РЅРѕРІС‹С… РІРµСЂС€РёРЅ
     *pOutputStride = pOutMesh->GetNumBytesPerVertex();
     UINT VBOutSize = (UINT)(pOutMesh->GetNumBytesPerVertex() * NumInVertices);
     (*ppOutVertices) = new BYTE[ VBOutSize ];

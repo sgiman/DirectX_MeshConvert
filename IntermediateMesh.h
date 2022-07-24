@@ -60,7 +60,7 @@ struct INTERMEDIATE_ANIMATION_FRAME_DATA : public SDKANIMATION_FRAME_DATA
 };
 
 //--------------------------------------------------------------------------------------
-// CIntermediateMesh class (промежуточная сетка)
+// CIntermediateMesh class (РїСЂРѕРјРµР¶СѓС‚РѕС‡РЅР°СЏ СЃРµС‚РєР°)
 //--------------------------------------------------------------------------------------
 class CIntermediateMesh
 {
@@ -72,7 +72,7 @@ public:
     }
     ~CIntermediateMesh() {}
 
-    // добавление данных
+    // РґРѕР±Р°РІР»РµРЅРёРµ РґР°РЅРЅС‹С…
     INTERMEDIATE_VERTEX_BUFFER* AddVertexBuffer(   INTERMEDIATE_MESH* pMesh,
                                                    UINT StreamID, 
                                                    UINT64 NumVertices,
