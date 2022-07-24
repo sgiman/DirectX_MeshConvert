@@ -124,7 +124,7 @@ HRESULT CLoaderXFile::Load( WCHAR* szFileName, FRAME_TRANSFORM_TYPE requestedBHT
         // Создайть промежуточную сетку
         hr = CreateIntermediateMesh( declTanBi, 6 );
         if(FAILED(hr))
-            goto Error;
+            goto Error; // ???
     }
 
     hr = S_OK;
