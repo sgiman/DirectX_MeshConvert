@@ -29,7 +29,7 @@ public:
     HRESULT Save( IDirect3DDevice9* pd3dDevice,
 				  WCHAR* szFileName, 
 				  MESH_TYPE meshType );
-	HRESULT SaveAnimationData( WCHAR* szFileName );
+    HRESULT SaveAnimationData( WCHAR* szFileName );
 
     D3DVERTEXELEMENT9* GetInputVertexDecl();
 	CIntermediateMesh*  GetMesh() { return m_pIntermediateMesh; }
