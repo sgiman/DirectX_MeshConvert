@@ -152,7 +152,7 @@ public:
     void ConvertToLittleEndian();
     void ConvertToBigEndian();
     bool GenerateTangents( IDirect3DDevice9* pd3dDevice );
-	bool GenerateNormals( IDirect3DDevice9* pd3dDevice );
+    bool GenerateNormals( IDirect3DDevice9* pd3dDevice );
     bool ConvertVertexData( IDirect3DDevice9* pd3dDevice, D3DVERTEXELEMENT9* pDecl, UINT NumElements );
 
     // Save functions
@@ -164,19 +164,19 @@ protected:
     bool FixFrameTicks( INTERMEDIATE_ANIMATION_FRAME_DATA* pBone );
     bool SolidifyFrameAnimationData(INTERMEDIATE_ANIMATION_FRAME_DATA* pFrame);
     bool ConvertVertexData( IDirect3DDevice9* pd3dDevice, void* pInVertices, UINT64 NumInVertices, D3DVERTEXELEMENT9* pInDecl, UINT NumInElements, 
-                        void** ppOutVertices, UINT64* pOutputStride, D3DVERTEXELEMENT9* pOutDecl, UINT NumOutElements );
+    void** ppOutVertices, UINT64* pOutputStride, D3DVERTEXELEMENT9* pOutDecl, UINT NumOutElements );
 
 private:
-    CStack<INTERMEDIATE_FRAME*>			m_FrameHeirarchyStack;
-    WCHAR							    m_szName[MAX_PATH];
-    bool							    m_bBigEndian;
+    CStack<INTERMEDIATE_FRAME*>		m_FrameHeirarchyStack;
+    WCHAR				m_szName[MAX_PATH];
+    bool				m_bBigEndian;
 
     // Data
     CStack<INTERMEDIATE_VERTEX_BUFFER*>	m_VertexBufferArray;
     CStack<INTERMEDIATE_INDEX_BUFFER*>  m_IndexBufferArray;
-    CStack<INTERMEDIATE_MESH*>			m_MeshArray;
-    CStack<INTERMEDIATE_SUBSET*>		m_SubsetArray;
-    CStack<INTERMEDIATE_FRAME*>			m_FrameArray;
+    CStack<INTERMEDIATE_MESH*>		m_MeshArray;
+    CStack<INTERMEDIATE_SUBSET*>	m_SubsetArray;
+    CStack<INTERMEDIATE_FRAME*>		m_FrameArray;
     CStack<INTERMEDIATE_MATERIAL*>      m_MaterialArray;
 
     // animation
